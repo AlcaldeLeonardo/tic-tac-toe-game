@@ -1,9 +1,8 @@
 import { createUser } from "./components/createUser.js";
 import { playRound } from "./components/playRound.js";
 
-const playerOne = createUser (`jorge`, "X")
-const playerTwo = createUser (`raul`, "O")
-
+const playerOne = createUser (prompt(`Player 1, what's your name?`), "X")
+const playerTwo = createUser (prompt(`Player 2, what's your name?`), "O")
 
 
 playRound(playerOne, playerTwo);
