@@ -1,11 +1,9 @@
 import { createUser } from "./components/createUser.js";
-import { gameBoard } from "./components/gameBoard.js";
+import { playRound } from "./components/playRound.js";
 
-const playerOne = createUser (`jorge`, 1)
-const playerTwo = createUser (`raul`, 2)
+const playerOne = createUser (`jorge`, "X")
+const playerTwo = createUser (`raul`, "O")
 
 
 
-console.log('playerOne :>> ', playerOne.name);
-console.log('playerTwo :>> ', playerTwo.name);
-console.log('board :>> ', gameBoard.getBoard());
+playRound(playerOne, playerTwo);
