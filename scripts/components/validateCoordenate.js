@@ -2,10 +2,13 @@ import { gameBoard } from "./gameBoard.js";
 
 export function validateCoordenates(x,y){
     const board = gameBoard.getBoard();
-    if(board[x][y] == null && x < 3 && y < 3) {
-        return true;
+    if(x < 3 && y < 3){
+        if(board[x][y] == null) {
+            return true;
+    }
     }else {
-        alert("Valores invalidos");
+        alert("Invalid values");
         return false;
     }
+    return false
 }

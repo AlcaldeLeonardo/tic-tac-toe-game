@@ -21,7 +21,7 @@ export function playRound(player1,player2){
     while(!playerWin(player1) && !playerWin(player2)){
         switchPlayer();
         do {
-            coordenates = prompt(`${activePlayer.name}, dime las coordenadas (XY): `)
+            coordenates = prompt(`${activePlayer.name}, Tell me the coordinates (XY): `)
             x = Number(coordenates[0]);
             y = Number(coordenates[1]);
 
@@ -32,5 +32,5 @@ export function playRound(player1,player2){
         }
 
         
-    console.log(`¡${activePlayer.name} ha ganado!`);
+    console.log(`¡${activePlayer.name} Win!`);
 }
