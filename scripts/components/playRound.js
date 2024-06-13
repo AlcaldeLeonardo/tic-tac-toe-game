@@ -1,5 +1,6 @@
 import { gameBoard } from "./gameBoard.js";
 import { playerWin, validateTie } from "./gameoverCondition.js";
+import { renderBoard } from "./renderModules/renderBoard.js";
 import { validateCoordenates } from "./validateCoordenate.js";
 
 export function playRound(player1, player2) {
@@ -24,19 +25,21 @@ export function playRound(player1, player2) {
         }
     }
 
-    while (!playerWin(player1) && !playerWin(player2) && !validateTie()) {
-        switchPlayer();
-        do {
-            coordenates = prompt(
-                `${activePlayer.name}, Tell me the coordinates (XY): `
-            );
-            x = Number(coordenates[0]);
-            y = Number(coordenates[1]);
-        } while (!validateCoordenates(x, y));
+    renderBoard();
 
-        gameBoard.setBoard(activePlayer.marker, x, y);
-        gameBoard.showBoard();
-    }
+    // while (!playerWin(player1) && !playerWin(player2) && !validateTie()) {
+    //     switchPlayer();
+    //     do {
+    //         coordenates = prompt(
+    //             `${activePlayer.name}, Tell me the coordinates (XY): `
+    //         );
+    //         x = Number(coordenates[0]);
+    //         y = Number(coordenates[1]);
+    //     } while (!validateCoordenates(x, y));
+
+    //     gameBoard.setBoard(activePlayer.marker, x, y);
+    //     gameBoard.showBoard();
+    // }
 
     showGameResult();
 }
