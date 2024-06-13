@@ -1,3 +1,5 @@
+import { updateBoard } from "./renderModules/renderBoard.js";
+
 export const gameBoard = (function () {
     const board = [];
 
@@ -18,6 +20,7 @@ export const gameBoard = (function () {
         for (let index = 0; index < 3; index++) {
             console.log(...board[index]);
         }
+        updateBoard();
     };
 
     return { getBoard, setBoard, showBoard };
