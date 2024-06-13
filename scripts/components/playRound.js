@@ -1,5 +1,5 @@
 import { gameBoard } from "./gameBoard.js";
-import { playerWin } from "./playerWin.js";
+import { playerWin, validateTie } from "./gameoverCondition.js";
 import { validateCoordenates } from "./validateCoordenate.js";
 
 export function playRound(player1,player2){
@@ -18,7 +18,7 @@ export function playRound(player1,player2){
     }
 
     
-    while(!playerWin(player1) && !playerWin(player2)){
+    while(!playerWin(player1) && !playerWin(player2) && !validateTie()){
         switchPlayer();
         do {
             coordenates = prompt(`${activePlayer.name}, Tell me the coordinates (XY): `)
@@ -31,6 +31,9 @@ export function playRound(player1,player2){
         gameBoard.showBoard();
         }
 
-        
-    console.log(`¡${activePlayer.name} Win!`);
+    if (!validateTie()){
+        console.log(`¡${activePlayer.name} Win!`);
+    } else {
+        console.log(`Tie, press F5 to restart`);
+    }
 }
