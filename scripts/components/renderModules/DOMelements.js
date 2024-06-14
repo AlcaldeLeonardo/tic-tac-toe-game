@@ -6,3 +6,11 @@ export const ModalElements = (function(){
 
     return {inputP1, inputP2, btnOk, modalContainer}
 })();
+
+export const BoardElements = (function(){
+    const BoardP1 = document.querySelector(`playerOneName`)
+    const BoardP2 = document.querySelector(`playerTwoName`)
+    const boardDOM = document.querySelector(`.board`)
+
+    return {BoardP1, BoardP2, boardDOM}
+})();
