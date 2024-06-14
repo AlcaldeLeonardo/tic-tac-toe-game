@@ -1,11 +1,11 @@
 import { gameBoard } from "./gameBoard.js";
 import { playerWin, validateTie } from "./gameoverCondition.js";
+import { getMarker } from "./renderModules/markers.js";
 import { renderBoard } from "./renderModules/renderBoard.js";
 import { validateCoordenates } from "./validateCoordenate.js";
 
 export function playRound(player1, player2) {
-    let activePlayer = null;
-    let coordenates, x, y;
+    let activePlayer = player1;
 
     function switchPlayer() {
         if (activePlayer == null) {
@@ -17,29 +17,32 @@ export function playRound(player1, player2) {
         console.log(`Es el turno de ${activePlayer.name}`);
     }
 
-    function showGameResult() {
-        if (!validateTie()) {
-            console.log(`¡${activePlayer.name} Win!`);
-        } else {
-            console.log(`Tie, press F5 to restart`);
-        }
-    }
-
     renderBoard();
 
-    // while (!playerWin(player1) && !playerWin(player2) && !validateTie()) {
-    //     switchPlayer();
-    //     do {
-    //         coordenates = prompt(
-    //             `${activePlayer.name}, Tell me the coordinates (XY): `
-    //         );
-    //         x = Number(coordenates[0]);
-    //         y = Number(coordenates[1]);
-    //     } while (!validateCoordenates(x, y));
+    const cellsBtn = document.querySelectorAll(`.cell`);
+    cellsBtn.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            let coordenates, x, y;
+            coordenates = btn.id;
+            x = coordenates[0];
+            y = coordenates[1];
 
-    //     gameBoard.setBoard(activePlayer.marker, x, y);
-    //     gameBoard.showBoard();
-    // }
+            if(validateCoordenates(x,y)){
+                gameBoard.setBoard(activePlayer.marker, x, y);
+                btn.innerHTML = "";
+                btn.appendChild(getMarker(activePlayer.marker));
 
-    showGameResult();
+                if (!playerWin(activePlayer)) {
+                    if (validateTie()) {
+                        console.log("Tie");
+                        renderBoard();
+                    } else switchPlayer(); 
+                } else {
+                    console.log(`${activePlayer.name} Win!!`);
+                    renderBoard();
+                }
+            }
+
+        });
+    });
 }
