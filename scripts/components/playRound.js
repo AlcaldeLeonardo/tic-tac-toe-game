@@ -9,11 +9,7 @@ export function playRound(player1, player2) {
     let coordenates, x, y;
 
     function switchPlayer() {
-        if (activePlayer == null) {
-            activePlayer = player1;
-        } else {
-            activePlayer = activePlayer == player1 ? player2 : player1;
-        }
+        activePlayer = activePlayer == player1 ? player2 : player1;
 
         console.log(`Es el turno de ${activePlayer.name}`);
     }
@@ -23,7 +19,7 @@ export function playRound(player1, player2) {
         cell.appendChild(getMarker(marker));
     }
 
-    function evalStatusGame(cell){
+    function evalStatusGame(cell) {
         if (validateCoordenates(x, y)) {
             updateCell(cell, activePlayer.marker, x, y);
 
@@ -48,11 +44,11 @@ export function playRound(player1, player2) {
     renderBoard();
 
     const cellsBtn = document.querySelectorAll(`.cell`);
+
     cellsBtn.forEach((btn) =>
         btn.addEventListener("click", () => {
-            getCordenate(btn)
+            getCordenate(btn);
             evalStatusGame(btn);
-        }
-)
+        })
     );
 }
