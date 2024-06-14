@@ -1,17 +1,16 @@
 import { gameBoard } from "../gameBoard.js";
+import { BoardElements } from "./DOMelements.js";
 import { getCell } from "./cell.js";
-import { getMarker } from "./markers.js";
+
+const board = BoardElements.boardDOM;
 
 export function renderBoard() {
-    const boardDOM = document.querySelector(`.board`)
     let matrix = gameBoard.getBoard();
-    boardDOM.innerHTML = "";
+    board.innerHTML = "";
 
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[i].length; j++) {
-            boardDOM.appendChild(getCell(matrix[i][j], `${i}${j}`));
-            
+            board.appendChild(getCell(matrix[i][j], `${i}${j}`));
         }
-        
     }
 }
