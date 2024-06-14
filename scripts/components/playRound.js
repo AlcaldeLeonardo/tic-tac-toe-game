@@ -6,6 +6,7 @@ import { validateCoordenates } from "./validateCoordenate.js";
 
 export function playRound(player1, player2) {
     let activePlayer = player1;
+    let coordenates, x, y;
 
     function switchPlayer() {
         if (activePlayer == null) {
@@ -17,31 +18,41 @@ export function playRound(player1, player2) {
         console.log(`Es el turno de ${activePlayer.name}`);
     }
 
+    function updateCell(cell, marker, x, y) {
+        gameBoard.setBoard(marker, x, y);
+        cell.appendChild(getMarker(marker));
+    }
+
+    function evalStatusGame(cell){
+        if (validateCoordenates(x, y)) {
+            updateCell(cell, activePlayer.marker, x, y);
+
+            if (!playerWin(activePlayer)) {
+                if (validateTie()) {
+                    console.log("Tie");
+                    renderBoard(); //to remove eventListener in this case
+                } else switchPlayer();
+            } else {
+                console.log(`${activePlayer.name} Win!!`);
+                renderBoard(); //to remove eventListener in this case
+            }
+        }
+    }
+
+    function getCordenate(cell) {
+        coordenates = cell.id;
+        x = coordenates[0];
+        y = coordenates[1];
+    }
+
     renderBoard();
 
     const cellsBtn = document.querySelectorAll(`.cell`);
-    cellsBtn.forEach((btn) => {
+    cellsBtn.forEach((btn) =>
         btn.addEventListener("click", () => {
-            let coordenates, x, y;
-            coordenates = btn.id;
-            x = coordenates[0];
-            y = coordenates[1];
-
-            if(validateCoordenates(x,y)){
-                gameBoard.setBoard(activePlayer.marker, x, y);
-                btn.appendChild(getMarker(activePlayer.marker));
-
-                if (!playerWin(activePlayer)) {
-                    if (validateTie()) {
-                        console.log("Tie");
-                        renderBoard();//to remove eventListener in this case
-                    } else switchPlayer(); 
-                } else {
-                    console.log(`${activePlayer.name} Win!!`);
-                    renderBoard();//to remove eventListener in this case
-                }
-            }
-
-        });
-    });
+            getCordenate(btn)
+            evalStatusGame(btn);
+        }
+)
+    );
 }

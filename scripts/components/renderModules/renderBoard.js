@@ -14,14 +14,4 @@ export function renderBoard() {
         }
         
     }
-
-    // matrix = matrix.flat();
-
-    // let i = 0;
-    // matrix.forEach(element => {
-        
-    //     boardDOM.appendChild(getCell(element, i));
-
-    //     i++;
-    // });
 }
