@@ -1,5 +1,4 @@
 import { createUser } from "./components/createUser.js";
-import { getPlayersName } from "./components/getPlayersName.js";
 import { playRound } from "./components/playRound.js";
 import { renderNames } from "./components/renderModules/renderNames.js";
 
@@ -14,7 +13,6 @@ const playerTwo = createUser ("", "O")
 function startGame(){
     playerOne.name = inputP1.value;
     playerTwo.name = inputP2.value;
-    console.log('input.value :>> ', inputP1.value);
     modalContainer.style.display = "none";
 
     renderNames(playerOne.name, playerTwo.name)
