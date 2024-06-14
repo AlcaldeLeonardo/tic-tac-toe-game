@@ -29,17 +29,16 @@ export function playRound(player1, player2) {
 
             if(validateCoordenates(x,y)){
                 gameBoard.setBoard(activePlayer.marker, x, y);
-                btn.innerHTML = "";
                 btn.appendChild(getMarker(activePlayer.marker));
 
                 if (!playerWin(activePlayer)) {
                     if (validateTie()) {
                         console.log("Tie");
-                        renderBoard();
+                        renderBoard();//to remove eventListener in this case
                     } else switchPlayer(); 
                 } else {
                     console.log(`${activePlayer.name} Win!!`);
-                    renderBoard();
+                    renderBoard();//to remove eventListener in this case
                 }
             }
 
