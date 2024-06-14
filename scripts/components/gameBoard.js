@@ -14,11 +14,5 @@ export const gameBoard = (function () {
         board[row][column] = marker;
     };
 
-    const showBoard = () => {
-        for (let index = 0; index < 3; index++) {
-            console.log(...board[index]);
-        }
-    };
-
-    return { getBoard, setBoard, showBoard };
+    return { getBoard, setBoard };
 })();
