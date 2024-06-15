@@ -1,17 +1,22 @@
 import { coordenates } from "./coordenates.js";
 import { gameBoard } from "./gameBoard.js";
 import { playerWin, validateTie } from "./gameoverCondition.js";
+import { BoardElements } from "./renderModules/DOMelements.js";
+import { showResultGame } from "./renderModules/DisplayStatusMenus.js";
 import { getMarker } from "./renderModules/markers.js";
 import { renderBoard } from "./renderModules/renderBoard.js";
 import { validateCoordenates } from "./validateCoordenate.js";
 
 let cellsBtn;
+let activePlayer;
+
 
 export function playRound(player1, player2) {
-    let activePlayer = player1;
-
+    activePlayer = player1;
 
     renderBoard();
+    updateScore(player1, player2);
+    
 
     cellsBtn = document.querySelectorAll(`.cell`);
 
@@ -26,6 +31,11 @@ export function playRound(player1, player2) {
     
 }
 
+function updateScore(player1, player2){
+    BoardElements.scoreP1.innerHTML = player1.getScore()
+    BoardElements.scoreP2.innerHTML = player2.getScore()
+}
+
 function evalStatusGame(btn, coordenates, activePlayer, player1, player2) {
     let x = coordenates.getX();
     let y = coordenates.getY();
@@ -35,16 +45,19 @@ function evalStatusGame(btn, coordenates, activePlayer, player1, player2) {
 
         if (!playerWin(activePlayer)) {
             if (validateTie()) {
-                console.log("Tie");
+                showResultGame("Tie");
                 removeEventListeners(); //to remove eventListener in this case
             } else return switchPlayer(activePlayer, player1, player2);
         } else {
-            console.log(`${activePlayer.name} Win!!`);
+            activePlayer.givePoint();
+            showResultGame(`${activePlayer.name} Win!!`);
+            console.log();
             removeEventListeners(); //to remove eventListener in this case
         }
 
-        return activePlayer
+        return activePlayer;
     }
+    return activePlayer;
 }
 
 function updateCell(btn, marker, x, y) {

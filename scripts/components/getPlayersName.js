@@ -7,4 +7,5 @@ export function getPlayersName(){
 
     BoardElements.BoardP1 .innerHTML = playerOne.name
     BoardElements.BoardP2.innerHTML = playerTwo.name
+
 }
